@@ -4,23 +4,10 @@ import pyperclip
 import json
 import sys
 
-# The path of the file where data is stored
+# The path of the Data File
 file_path = "clipper_data.json"
 
-# Load the data from the saved file
-def load():
-    try:
-        with open(file_path, 'r') as file:
-            return json.load(file)
-    except:
-        return {}
-
-# Save the data to the file
-def save(data):
-    with open(file_path, 'w') as file:
-        json.dump(data, file)
-
-# Validate Command Line Args
+# Valid number of Command Line Arguments
 if len(sys.argv) < 3:
     raise ValueError("Argument not found")
 
@@ -33,8 +20,23 @@ def get_clip_key():
     clip_key = sys.argv[2]
     # Ensure Key is valid
     if clip_key == None or len(clip_key) < 1:
-        raise ValueError("Invalid Key for Save Command")
+        raise ValueError("Key not found for Command")
+    elif len(clip_key) > 1000:
+        raise ValueError("The Key is too long")
     return clip_key
+
+# Load from the Data File
+def load():
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except:
+        return {}
+
+# Save the Data File
+def save(data):
+    with open(file_path, 'w') as file:
+        json.dump(data, file)
 
 # Process the command
 # Set Command puts the clip into the stored file
