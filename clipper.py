@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Clipboard Data Management
 import pyperclip
 import json
