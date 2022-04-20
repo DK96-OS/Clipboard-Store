@@ -15,7 +15,7 @@ if len(sys.argv) < 3:
 command = sys.argv[1].lower()
 
 # Obtain the Key from the command line arguments
-def get_clip_key():
+def get_clip_key() -> str:
     # Expect 2nd Argument to be key name
     clip_key = sys.argv[2]
     # Ensure Key is valid
@@ -26,7 +26,7 @@ def get_clip_key():
     return clip_key
 
 # Load from the Data File
-def load():
+def load() -> dict:
     try:
         with open(file_path, 'r') as file:
             return json.load(file)
@@ -50,7 +50,7 @@ if command == "set":
     # Save the data to the file
     save(data)
 
-# Get Command gets a clip from the stored data
+# Get Command searches for a clip from the stored data
 elif command == "get":
     # Get the Key Argument
     key = get_clip_key()
@@ -58,6 +58,14 @@ elif command == "get":
     data = load()
     # Get Clip using Key
     pyperclip.copy(str(data[key]))
+
+# Keys Command prints all keys
+elif command == "keys":
+    # Load data
+    data = load()
+    # Get and print all keys
+    for key in data.keys:
+        print(key)
 
 # Unknown Command
 else:
