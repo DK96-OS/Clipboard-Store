@@ -8,7 +8,8 @@ import sys
 file_path = "clipper_data.json"
 
 # Valid number of Command Line Arguments
-if len(sys.argv) < 3:
+# The lowest number of arguments for a valid command is 2.
+if len(sys.argv) < 2:
     raise ValueError("Argument not found")
 
 # Get the command
@@ -64,7 +65,7 @@ elif command == "keys":
     # Load data
     data = load()
     # Get and print all keys
-    for key in data.keys:
+    for key in data.keys():
         print(key)
 
 # Unknown Command
