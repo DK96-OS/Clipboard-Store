@@ -44,12 +44,20 @@ def save(data):
 if command == "set":
     # Get the Key Argument
     key = get_clip_key()
-    # Load any existing data
-    data = load()
-    # Save Clip using Key
-    data[key] = str(pyperclip.paste())
-    # Save the data to the file
-    save(data)
+    # Get From the Clipboard
+    clip_content = pyperclip.paste()
+    # Validate Clipboard Content
+    if len(clip_content) == 0:
+        print("Nothing Found On Clipboard")
+    else:
+        # Load Existing Data
+        data = load()
+        # Save Clip using Key
+        data[key] = str(clip_content)
+        # Save the Data File
+        save(data)
+        # Task Completion Message
+        print("Copied From Clipboard To Key (" + key + ")")
 
 # Get Command searches for a clip from the stored data
 elif command == "get":
@@ -57,17 +65,39 @@ elif command == "get":
     key = get_clip_key()
     # Load any existing data
     data = load()
-    # Get Clip using Key
-    pyperclip.copy(str(data[key]))
+    # Check if Key is valid
+    if key in data:
+        # Obtain Value of Key
+        value = data[key]
+        try:
+            pyperclip.copy(str(value))
+            print("Copied To Clipboard (" + key + ")")
+        except:
+            print("Could Not Copy To Clipboard")
+    else:
+        print("Key Not Found (" + key + ")")
 
 # Keys Command prints all keys
 elif command == "keys":
-    # Load data
+    # Load from Data File
     data = load()
-    # Get and print all keys
-    for key in data.keys():
-        print(key)
+    # Get all Keys
+    data_keys = data.keys()
+    # Count the Number of Keys
+    key_count = len(data_keys)
+    # Check if there are no Keys
+    if key_count == 0:
+        print("There are no Keys stored")
+    else:
+        # New Line First
+        print()
+        for key in data_keys:
+            # Do not show keys starting with underscore
+            if not str.startswith(key, '_'):
+                print(key)
+        # Print the key count at the end
+        print("\n\tTotal Key Count : " + str(key_count) + "\n")
 
 # Unknown Command
 else:
-    raise ValueError("Unknown Command Received" + command)
+    raise ValueError("Unknown Command Received :" + command)
