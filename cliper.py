@@ -5,7 +5,7 @@ import json
 import sys
 
 # The path of the Data File
-file_path = "clipper_data.json"
+file_path = "cliper_data.json"
 
 # Valid number of Command Line Arguments
 # The lowest number of arguments for a valid command is 2.
