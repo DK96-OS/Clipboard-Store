@@ -11,28 +11,34 @@ def getArguments() -> str:
     return arguments
 
 arguments = getArguments()
+
 # Command is the first Argument
-command = arguments[0].lower()
+if arguments == None:
+    command = None
+else:
+    command = arguments[0].lower()
 
 # When Command has a Key, it is 2nd argument
 def getKey() -> str:
     # Expect 2nd Argument to be key name
-    clip_key = arguments[1]
+    key = arguments[1]
     # Ensure Key is valid
-    if clip_key == None or len(clip_key) < 1:
-        raise ValueError("Key not found for Command")
-    elif len(clip_key) > 1000:
-        raise ValueError("The Key is too long")
-    return clip_key
+    from io.validate.keys import isValid
+    isValid(key)
+    return key
 
 # Process the command
 if command is None:
-    print("Invalid Command")
+    print("Missing Command")
 
 # Set Command inserts clip into Data File
 elif command == "set":
     # Get the Key Argument
-    key = getKey()
+    key = arguments[1]
+    from io.validate.keys import isValid
+    if not isValid(key):
+        raise
+
     # Get From the Clipboard
     import pyperclip
     clip_content = pyperclip.paste()
@@ -94,4 +100,4 @@ elif command == "keys":
 
 # Unknown Command
 else:
-    raise ValueError("Unknown Command Received :" + command)
+    print("Invalid Command :" + command)
