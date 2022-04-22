@@ -23,16 +23,24 @@ def processArguments(args: list) -> bool:
         return False
     # Command is the first Argument
     command = args[0].lower()
+
     # Identify the Command
     if command == "set":
         from command import set
         return set.run(args[1:])
+    
     elif command == "get":
         from command import get
         return get.run(args[1:])
+    
     elif command == "keys":
         from command import keys
         return keys.run(args[1:])
+    
+    elif command in ("del", "delete"):
+        from command import delete
+        return delete.run(args[1:])
+    
     # No Command was run
     print("Invalid Command :" + command)
     return False
