@@ -41,7 +41,7 @@ elif command == "set":
         print("Nothing Found On Clipboard")
     else:
         # Load Existing Data
-        from fileio import load, save
+        from fileio.fileio import load, save
         data = load()
         # Save Clip using Key
         data[key] = str(clip_content)
@@ -55,7 +55,7 @@ elif command == "get":
     # Get the Key Argument
     key = getKey()
     # Load any existing data
-    from fileio import load
+    from fileio.fileio import load
     data = load()
     # Check if Key is valid
     if key in data:
@@ -73,7 +73,7 @@ elif command == "get":
 # Keys Command prints all keys
 elif command == "keys":
     # Load from Data File
-    from fileio import load
+    from fileio.fileio import load
     data = load()
     # Get all Keys
     data_keys = data.keys()
