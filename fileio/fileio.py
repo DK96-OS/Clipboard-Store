@@ -1,5 +1,4 @@
 # File Management Operations and Configuration
-import json
 
 # The path of the Data File
 file_path = "./user_data/data.json"
@@ -13,6 +12,7 @@ def load() -> dict:
         # Open the File
         with open(file_path) as file:
             # Assume JSON
+            import json
             return json.load(file)
     except:
         # Default Empty List
@@ -26,5 +26,6 @@ def save(data: dict) -> None:
     # Overwrite the Data File
     with open(file_path, 'w') as file:
         # Use JSON
+        import json
         json.dump(data, file)
     
