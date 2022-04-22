@@ -15,10 +15,10 @@ def run(args: list) -> bool:
     if not keys.isValid(key):
         return False
     # Perform Get Operation
-    _cmd_get(key)
+    return _cmd_get(key)
 
 
-def _cmd_get(key: str):
+def _cmd_get(key: str) -> bool:
     """
     Performs the Get Command on a Valid Key.
     The Key may not exist, in which case a message is printed
@@ -29,12 +29,15 @@ def _cmd_get(key: str):
     # Check if Key is valid
     if key in data:
         # Obtain Value of Key
-        value = data[key]
+        value = str(data[key])
         try:
             import pyperclip
-            pyperclip.copy(str(value))
+            pyperclip.copy(value)
             print("Copied To Clipboard (" + key + ")")
+            return True
         except:
             print("Could Not Copy To Clipboard")
+            return False
     else:
         print("Key Not Found (" + key + ")")
+        return False
