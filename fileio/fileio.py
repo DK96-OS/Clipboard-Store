@@ -16,7 +16,7 @@ def load() -> dict:
         return {}
 
 # Save the Data File
-def save(data):
+def save(data: dict):
     # Overwrite the Data File
     with open(file_path, 'w') as file:
         # Use JSON
