@@ -128,5 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Clipper Data File
-clipper_data.json
+# Cliper User Data Files
+user_data/
