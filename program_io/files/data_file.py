@@ -1,9 +1,15 @@
 # File Management Operations and Configuration
 
 # The path of the Data File
-file_path = "./user_data/data.json"
+import os.path
+file_path = os.path.abspath("user_data/data.json")
 
-# Load from the Data File
+
+def getPath():
+    from os.path import abspath
+    abspath("user_data/data.json")
+
+
 def load() -> dict:
     """ Read a Dictionary from the Data File
     Note: Numerical keys are loaded as strings
@@ -18,7 +24,7 @@ def load() -> dict:
         # Default Empty List
         return {}
 
-# Save the Data File
+
 def save(data: dict) -> None:
     """ Write this Dictionary to the Data File
     Note: Will overwrite any existing data
