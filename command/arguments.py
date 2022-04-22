@@ -1,6 +1,7 @@
+""" Process Command Line Arguments """
 
 
-def getArguments() -> str:
+def getArguments() -> list:
     """
     Get the Arguments for this run
     If there are no arguments, returns None
@@ -13,24 +14,25 @@ def getArguments() -> str:
     return arguments
 
 
-def processArguments(args: list):
+def processArguments(args: list) -> bool:
     """
     Process the Command Arguments provided
     """
     if args == None:
         print("Missing Command")
-        return
-    # Otherwise, Command is the first Argument
+        return False
+    # Command is the first Argument
     command = args[0].lower()
     # Identify the Command
     if command == "set":
-        from command.set import run
-        run(args[1:])
+        from command import set
+        return set.run(args[1:])
     elif command == "get":
-        from command.get import run
-        run(args[1:])
+        from command import get
+        return get.run(args[1:])
     elif command == "keys":
-        from command.keys import run
-        run(args[1:])
-    else:
-        print("Invalid Command :" + command)
+        from command import keys
+        return keys.run(args[1:])
+    # No Command was run
+    print("Invalid Command :" + command)
+    return False
