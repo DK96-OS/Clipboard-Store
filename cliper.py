@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # Clipboard Data Management
 
-# Get the Arguments for this run
+
 def getArguments() -> str:
+    """ Get the Arguments for this run """
     import sys
     arguments = sys.argv[1:]
     # Must have at least one Argument
@@ -26,7 +27,7 @@ if command is None:
 elif command == "set":
     # Get the Key Argument
     key = arguments[1]
-    from io.validate.keys import isValid
+    from program_io.validate.keys import isValid
     if not isValid(key):
         raise
     # Get From the Clipboard
@@ -37,7 +38,7 @@ elif command == "set":
         print("Nothing Found On Clipboard")
     else:
         # Load Existing Data
-        from fileio.fileio import load, save
+        from program_io.files.data_file import load, save
         data = load()
         # Save Clip using Key
         data[key] = str(clip_content)
@@ -50,11 +51,11 @@ elif command == "set":
 elif command == "get":
     # Get the Key Argument
     key = arguments[1]
-    from io.validate.keys import isValid
+    from program_io.validate.keys import isValid
     if not isValid(key):
         raise
     # Load any existing data
-    from fileio.fileio import load
+    from program_io.files.data_file import load
     data = load()
     # Check if Key is valid
     if key in data:
@@ -72,7 +73,7 @@ elif command == "get":
 # Keys Command prints all keys
 elif command == "keys":
     # Load from Data File
-    from fileio.fileio import load
+    from program_io.files.data_file import load
     data = load()
     # Get all Keys
     data_keys = data.keys()
