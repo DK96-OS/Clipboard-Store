@@ -16,7 +16,7 @@ def run(args: list) -> bool:
     if not keys.isValid(key):
         return False
     # Perform Set Operation
-    _cmd_set(key)
+    return _cmd_set(key)
 
 
 def _cmd_set(key: str) -> bool:
@@ -29,7 +29,7 @@ def _cmd_set(key: str) -> bool:
     # Validate Clipboard Content
     if len(clip_content) == 0:
         print("Nothing Found On Clipboard")
-        return
+        return False
     # Load Existing Data
     from program_io.files import data_file
     data = data_file.load()
@@ -39,3 +39,4 @@ def _cmd_set(key: str) -> bool:
     data_file.save(data)
     # Task Completion Message
     print("Copied From Clipboard To Key (" + key + ")")
+    return True
