@@ -1,20 +1,20 @@
 """ Testing FileIO """
 import unittest
 
-from fileio.fileio import load, save
+from program_io.files import data_file
 
-class TestFileIO(unittest.TestCase):
+class TestDataFile(unittest.TestCase):
     """  """
 
     def testSaveAndLoadSimpleData(self):
         """  """
         self.simpleDataDict = {"1" : "A"}
         # Save to File
-        save(self.simpleDataDict)
+        data_file.save(self.simpleDataDict)
         # Get from File and compare
         self.assertDictEqual(
             self.simpleDataDict,
-            load()
+            data_file.load()
         )
 
     def testSaveAndLoadLargerData(self):
@@ -27,9 +27,9 @@ class TestFileIO(unittest.TestCase):
             key = str(i)
             self.largeDataDict[key] = number
         # Save to File
-        save(self.largeDataDict)
+        data_file.save(self.largeDataDict)
         # Get from File and compare
         self.assertDictEqual(
             self.largeDataDict,
-            load()
+            data_file.load()
         )
