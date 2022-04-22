@@ -18,15 +18,6 @@ if arguments == None:
 else:
     command = arguments[0].lower()
 
-# When Command has a Key, it is 2nd argument
-def getKey() -> str:
-    # Expect 2nd Argument to be key name
-    key = arguments[1]
-    # Ensure Key is valid
-    from io.validate.keys import isValid
-    isValid(key)
-    return key
-
 # Process the command
 if command is None:
     print("Missing Command")
@@ -38,7 +29,6 @@ elif command == "set":
     from io.validate.keys import isValid
     if not isValid(key):
         raise
-
     # Get From the Clipboard
     import pyperclip
     clip_content = pyperclip.paste()
@@ -59,7 +49,10 @@ elif command == "set":
 # Get Command returns clipped value from the Data File
 elif command == "get":
     # Get the Key Argument
-    key = getKey()
+    key = arguments[1]
+    from io.validate.keys import isValid
+    if not isValid(key):
+        raise
     # Load any existing data
     from fileio.fileio import load
     data = load()
