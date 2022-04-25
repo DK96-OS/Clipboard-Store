@@ -22,5 +22,9 @@ def isValid(key: str) -> bool:
         print("Illegal Key : " + key)
         return False
     
+    # Space only strings cannot be keys
+    elif str.isspace(key):
+        return False
+
     # Key is Valid
     return True
