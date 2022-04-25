@@ -36,6 +36,8 @@ def _cmd_del(data: dict, key: str) -> bool:
     Returns True if the Key was deleted
     """
     # Validate Key
+    if str.isspace(key):
+        return False
     if key in ('*', '_'):
         return False
     # Check if Key exists
