@@ -2,10 +2,11 @@
 
 
 def run(args: list) -> bool:
-    """
+    """Initializes the Set Command
+
     Validates Arguments, executes the Set Command
-    Args must start with the Set Command's Key
     If Key is invalid, Prints Invalid Key Message
+    Returns true if the Set Command Succeeded
     """
     if len(args) < 1:
         print("Set Command Requires Key")
@@ -20,9 +21,7 @@ def run(args: list) -> bool:
 
 
 def _cmd_set(key: str) -> bool:
-    """
-    Performs the Set operation on a Valid Key
-    """
+    """Performs the Set operation on a Valid Key."""
     # Get From the Clipboard
     from pyperclip import paste
     clip_content = str(paste())
