@@ -7,13 +7,21 @@ You can add the repository directory to your Environment Path to run from any wo
 
 ## Commands
 __Set__: Copy from Clipboard to Data File
-`cliper set example-key`
+
+- `cliper set example-key`
 
 __Get__: Copy from Data File to Clipboard
-`cliper get example-key`
+
+- `cliper get example-key`
 
 __Keys__: Print a list of the stored Keys
-`cliper keys`
+
+- `cliper keys`
+
+__Del__ / __Delete__: Remove Key-Value Pair(s)
+
+- `cliper del example-key`
+- `cliper del example-key1 example-key2`
 
 ## Dependencies
 - Python 3.8 or higher
@@ -24,5 +32,5 @@ On Linux:
 
 
 ## Additional Information
-The data is stored in a __JSON__ formatted file, called `cliper_data.json`.
-This file is kept in the same directory as `cliper.py`.
+The data is stored in a __JSON__ formatted file, called `data.json`.
+This file is kept in the subdirectory `user_data/`.
