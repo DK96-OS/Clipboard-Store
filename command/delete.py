@@ -21,6 +21,8 @@ def run(args: list) -> bool:
         if _cmd_del(data, key):
             data_updated = True
             print("Successfully Deleted Key (" + key + ")")
+        else:
+            print("Could not Delete Key (" + key + ")")
     # 
     if data_updated:
         # Save the updated Data File
@@ -36,13 +38,12 @@ def _cmd_del(data: dict, key: str) -> bool:
     Returns True if the Key was deleted
     """
     # Validate Key
-    if str.isspace(key):
-        return False
-    if key in ('*', '_'):
+    from program_io.validate import keys
+    if not keys.isValid(key):
         return False
     # Check if Key exists
-    if key in data:
-        del data[key]
-        return True
-    # Key did not exist, no changes
-    return False
+    if key not in data:
+        return False
+    # Delete Key
+    del data[key]
+    return True
