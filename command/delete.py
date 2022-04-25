@@ -2,15 +2,14 @@
 
 
 def run(args: list) -> bool:
-    """
-    Validates Delete Command Arguments
-    Initiates Delete Command Operation
+    """Initiate the Delete Command.
+
+    Validates that Arguments are valid keys
     Returns True if a Key was deleted
     """
     # Ensure that args is not empty
     if len(args) < 1:
         return False
-    # Each Argument is a Key to be deleted
     # Load Data File once
     from program_io.files import data_file
     data = data_file.load()
@@ -32,14 +31,16 @@ def run(args: list) -> bool:
 
 
 def _cmd_del(data: dict, key: str) -> bool:
-    """
-    Performs the Delete Command Operation
+    """Performs the Delete Operation on a single Key
+
     Returns True if the Key was deleted
     """
+    # Validate Key
+    if key in ('*', '_'):
+        return False
     # Check if Key exists
     if key in data:
         del data[key]
-        # Key Deleted, notify caller
         return True
     # Key did not exist, no changes
     return False
