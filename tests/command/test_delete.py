@@ -1,7 +1,7 @@
 """Delete Command Test"""
 
 import unittest
-from command.delete import run, _cmd_del
+from command.delete import _cmd_del
 
 class TestDelete(unittest.TestCase):
     """Testing the Delete Command"""
