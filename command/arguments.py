@@ -41,6 +41,10 @@ def processArguments(args: list) -> bool:
         from command import delete
         return delete.run(args[1:])
     
+    elif command in ("help", "--help"):
+        from help import run_help
+        return run_help(args[1:])
+    
     # No Command was run
     print("Invalid Command :" + command)
     return False
