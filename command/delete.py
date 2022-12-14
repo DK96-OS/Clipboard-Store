@@ -1,5 +1,8 @@
 """ The Delete Command """
 
+from program_io.files import data_file
+from program_io.validate import keys
+
 
 def run(args: list) -> bool:
     """Initiate the Delete Command.
@@ -11,7 +14,6 @@ def run(args: list) -> bool:
     if len(args) < 1:
         return False
     # Load Data File once
-    from program_io.files import data_file
     data = data_file.load()
     # Data needs to be saved only if a Key is deleted
     data_updated = False
@@ -23,7 +25,7 @@ def run(args: list) -> bool:
             print("Successfully Deleted Key (" + key + ")")
         else:
             print("Could not Delete Key (" + key + ")")
-    # 
+    #
     if data_updated:
         # Save the updated Data File
         data_file.save(data)
@@ -33,13 +35,12 @@ def run(args: list) -> bool:
 
 
 def _cmd_del(data: dict, key: str) -> bool:
-    """Performs the Delete Operation on a single Key
-
+    """
+    Performs the Delete Operation on a single Key
     Returns True if the Key was deleted
     """
     # Validate Key
-    from program_io.validate import keys
-    if not keys.isValid(key):
+    if not keys.is_valid(key):
         return False
     # Check if Key exists
     if key not in data:

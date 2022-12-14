@@ -3,6 +3,6 @@
 
 from command import arguments
 
-arguments.processArguments(
-    arguments.getArguments()
+arguments.process_arguments(
+    arguments.get_arguments()
 )

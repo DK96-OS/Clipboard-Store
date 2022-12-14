@@ -1,5 +1,10 @@
 """ The Set Command """
 
+from pyperclip import paste
+
+from program_io.files import data_file
+from program_io.validate import keys
+
 
 def run(args: list) -> bool:
     """Initializes the Set Command
@@ -13,8 +18,7 @@ def run(args: list) -> bool:
         return False
     key = str(args[0])
     # Validate Key
-    from program_io.validate import keys
-    if not keys.isValid(key):
+    if not keys.is_valid(key):
         return False
     # Perform Set Operation
     return _cmd_set(key)
@@ -23,14 +27,12 @@ def run(args: list) -> bool:
 def _cmd_set(key: str) -> bool:
     """Performs the Set operation on a Valid Key."""
     # Get From the Clipboard
-    from pyperclip import paste
     clip_content = str(paste())
     # Validate Clipboard Content
     if len(clip_content) == 0:
         print("Nothing Found On Clipboard")
         return False
     # Load Existing Data
-    from program_io.files import data_file
     data = data_file.load()
     # Save Clip using Key
     data[key] = clip_content
