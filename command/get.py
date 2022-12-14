@@ -1,5 +1,10 @@
 """ The Get Command """
 
+from pyperclip import copy
+
+from program_io.files import data_file
+from program_io.validate import keys
+
 
 def run(args: list) -> bool:
     """
@@ -11,8 +16,7 @@ def run(args: list) -> bool:
         return False
     key = str(args[0])
     # Validate Key
-    from program_io.validate import keys
-    if not keys.isValid(key):
+    if not keys.is_valid(key):
         return False
     # Perform Get Operation
     return _cmd_get(key)
@@ -24,15 +28,13 @@ def _cmd_get(key: str) -> bool:
     The Key may not exist, in which case a message is printed
     """
     # Load any existing data
-    from program_io.files import data_file
     data = data_file.load()
     # Check if Key is valid
     if key in data:
         # Obtain Value of Key
         value = str(data[key])
         try:
-            import pyperclip
-            pyperclip.copy(value)
+            copy(value)
             print("Copied To Clipboard (" + key + ")")
             return True
         except:

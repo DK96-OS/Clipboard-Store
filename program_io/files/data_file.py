@@ -1,17 +1,19 @@
-# File Management Operations and Configuration
+""" File Management Operations and Configuration. """
+
+import json
+from os.path import realpath
+from pathlib import Path
 
 
-def getFilePath():
+def get_file_path():
     """
     The path of the Data File.
     The goal is to be independent of working directory
     """
-    from os.path import realpath
-    from pathlib import Path
     # The path of this File
-    absPath: Path = Path(realpath(__file__))
+    abs_path: Path = Path(realpath(__file__))
     # Go to the Root of the Cliper Project
-    project_root: Path = absPath.parent.parent.parent
+    project_root: Path = abs_path.parent.parent.parent
     # Locate the Data File in the Project
     file_path = "user_data/data.json"
     # Combine Project Path with Data File Path
@@ -25,9 +27,8 @@ def load() -> dict:
     """
     try:
         # Open the File
-        with open(getFilePath()) as file:
+        with open(get_file_path()) as file:
             # Assume JSON
-            import json
             return json.load(file)
     except:
         # Default Empty List
@@ -40,8 +41,7 @@ def save(data: dict) -> None:
     Note: Will overwrite any existing data
     """
     # Overwrite the Data File
-    with open(getFilePath(), 'w') as file:
+    with open(get_file_path(), 'w') as file:
         # Use JSON
-        import json
         json.dump(data, file)
     
